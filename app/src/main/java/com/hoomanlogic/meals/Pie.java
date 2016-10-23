@@ -59,7 +59,7 @@ public class Pie extends View {
         );
         mBgColor = a.getColor(R.styleable.Pie_bgColor, mBgColor);
         mBorderColor = a.getColor(R.styleable.Pie_borderColor, mBorderColor);
-        mBorderThickness = a.getDimension(R.styleable.Pie_borderColor, mBorderThickness);
+        mBorderThickness = a.getDimension(R.styleable.Pie_borderThickness, mBorderThickness);
         mMax = a.getFloat(R.styleable.Pie_max, mMax);
 
         // TODO: Research when this line is necessary
