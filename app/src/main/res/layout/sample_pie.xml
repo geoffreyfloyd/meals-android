@@ -1,0 +1,22 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.hoomanlogic.meals"
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222">
+
+    <com.hoomanlogic.meals.Pie
+        android:id="@+id/pie"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app2:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        app2:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app2:layout_constraintRight_toRightOf="parent"
+        app2:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp" />
+
+</android.support.constraint.ConstraintLayout>

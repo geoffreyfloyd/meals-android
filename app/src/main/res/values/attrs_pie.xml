@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="Pie">
+        <attr name="bgColor" format="color" />
+        <attr name="borderColor" format="color" />
+        <attr name="borderThickness" format="dimension" />
+        <attr name="max" format="float" />
+    </declare-styleable>
+</resources>
