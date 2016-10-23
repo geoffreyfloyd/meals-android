@@ -62,7 +62,7 @@ public class Pie extends View {
         mBorderThickness = a.getDimension(R.styleable.Pie_borderThickness, mBorderThickness);
         mMax = a.getFloat(R.styleable.Pie_max, mMax);
 
-        // TODO: Research when this line is necessary
+        // Dispose attributes collection
         a.recycle();
 
         // Set up Fill Painter
@@ -76,11 +76,17 @@ public class Pie extends View {
         mStrokePaint.setStyle(Paint.Style.STROKE);
     }
 
+    /**
+     * Sets the data used to set the pie segments
+     */
     public void setData(float[] data) {
         this.mData = data;
         this.invalidate();
     }
 
+    /**
+     * Sets the colors used for the series of data
+     */
     public void setColors(int[] colors) {
         this.mColors = colors;
         this.invalidate();
@@ -134,9 +140,7 @@ public class Pie extends View {
         float[] segments = getSegments();
         float arcSpanned = -90;
         RectF arcBoundary = new RectF(xPad + borderStrokeHalf, yPad + borderStrokeHalf, diameter + xPad - borderStrokeHalf, diameter + yPad - borderStrokeHalf);
-        Random numGen = new Random();
         for (int i = 0; i < segments.length; i++) {
-            // int color = Color.argb(255, numGen.nextInt(256), numGen.nextInt(256), numGen.nextInt(256));
             mFillPaint.setColor(mColors[i]);
             canvas.drawArc(arcBoundary, arcSpanned, segments[i], true, mFillPaint);
             arcSpanned += segments[i];
