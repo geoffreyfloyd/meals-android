@@ -45,7 +45,14 @@ public abstract class ApiAiOperator extends BaseOperator {
                         // FOO
                         OperatorResponse opResponse = new OperatorResponse();
                         try {
-                            // opResponse.SessionId = response.getString("sessionId");
+                            // Check status returned in response
+                            Boolean success = response.getJSONObject("status").getInt("code") == 200;
+                            if (!success) {
+                                throw new JSONException("API Request was not successful");
+                            }
+                            // Get context id and suggested action
+                            opResponse.ContextId = response.getString("sessionId");
+                            opResponse.Action = response.getJSONObject("result").getString("action");
                             JSONObject entities = response.getJSONObject("result").getJSONObject("parameters");
                             JSONArray parameterKeys = entities.names();
                             int keyLen = parameterKeys.length();
@@ -62,7 +69,6 @@ public abstract class ApiAiOperator extends BaseOperator {
                         catch (Exception e) {
                             System.out.println(e.toString());
                         }
-
                     }
                 },
                 new Response.ErrorListener() {

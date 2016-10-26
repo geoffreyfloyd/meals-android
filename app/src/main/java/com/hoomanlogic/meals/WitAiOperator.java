@@ -17,8 +17,8 @@ import org.json.JSONObject;
 import java.util.Map;
 
 public abstract class WitAiOperator extends BaseOperator {
-    final private String WIT_AI_KEY = "6DQ2DC3A3DBNMM4AM4XPAKDBAUKA3TPU";
-    final private String WIT_AI_URL = "https://api.wit.ai/message?q=";
+    final private String WIT_AI_KEY = "KLHUGVC6PAI45WRMIKP4HWK625GM322R"; //"6DQ2DC3A3DBNMM4AM4XPAKDBAUKA3TPU";
+    final private String WIT_AI_URL = "https://api.wit.ai/converse?q=";
     final private Map<String, String> mHeaders = new ArrayMap<>();
     private RequestQueue mRequestQueue = null;
 
@@ -42,6 +42,12 @@ public abstract class WitAiOperator extends BaseOperator {
                         // FOO
                         OperatorResponse opResponse = new OperatorResponse();
                         try {
+                            String type = response.getString("type");
+                            if (type == "action") {
+                                opResponse.Action = response.getString("action");
+                            }
+                            else if (type == "")
+
                             JSONObject entities = response.getJSONObject("entities");
                             JSONArray parameterKeys = entities.names();
                             int keyLen = parameterKeys.length();

@@ -9,5 +9,8 @@ import java.util.Map;
  */
 
 public class OperatorResponse {
+    public String Action;
+    public String ContextId;
     public Map<String, String> Parameters = new ArrayMap<>();
+    public Map<String, String> Prompts = new ArrayMap<>();
 }

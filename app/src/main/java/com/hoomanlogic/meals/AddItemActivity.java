@@ -28,9 +28,10 @@ public class AddItemActivity extends AppCompatActivity {
         mRequestQueue = Volley.newRequestQueue(this);
 
         // Set up operator
-        mOperator = new ApiAiOperator(mRequestQueue) {
+        mOperator = new WitAiOperator(mRequestQueue) {
             @Override
             public void onOperatorResponse(OperatorResponse response) {
+                System.out.println(response.Action);
                 for (Map.Entry<String, String> entry : response.Parameters.entrySet()) {
                     String pair = entry.getKey() + ":" + entry.getValue();
                     System.out.println(pair);
