@@ -8,6 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.hoomanlogic.ai.BaseOperator;
+import com.hoomanlogic.ai.LuisAiOperator;
+
 import java.util.Map;
 
 public class AddItemActivity extends AppCompatActivity {
@@ -28,10 +31,10 @@ public class AddItemActivity extends AppCompatActivity {
         mRequestQueue = Volley.newRequestQueue(this);
 
         // Set up operator
-        mOperator = new WitAiOperator(mRequestQueue) {
+        mOperator = new LuisAiOperator(mRequestQueue) {
             @Override
             public void onOperatorResponse(OperatorResponse response) {
-                System.out.println(response.Action);
+                System.out.println(response.Intent);
                 for (Map.Entry<String, String> entry : response.Parameters.entrySet()) {
                     String pair = entry.getKey() + ":" + entry.getValue();
                     System.out.println(pair);

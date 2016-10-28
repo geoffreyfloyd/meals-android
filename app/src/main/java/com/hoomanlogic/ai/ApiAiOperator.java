@@ -1,4 +1,4 @@
-package com.hoomanlogic.meals;
+package com.hoomanlogic.ai;
 
 import android.net.Uri;
 import android.support.v4.util.ArrayMap;
@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.hoomanlogic.meals.OperatorResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +53,7 @@ public abstract class ApiAiOperator extends BaseOperator {
                             }
                             // Get context id and suggested action
                             opResponse.ContextId = response.getString("sessionId");
-                            opResponse.Action = response.getJSONObject("result").getString("action");
+                            opResponse.Intent = response.getJSONObject("result").getString("action");
                             JSONObject entities = response.getJSONObject("result").getJSONObject("parameters");
                             JSONArray parameterKeys = entities.names();
                             int keyLen = parameterKeys.length();

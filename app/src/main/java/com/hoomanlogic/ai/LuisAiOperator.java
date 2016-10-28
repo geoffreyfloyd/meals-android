@@ -1,4 +1,4 @@
-package com.hoomanlogic.meals;
+package com.hoomanlogic.ai;
 
 import android.net.Uri;
 import android.support.v4.util.ArrayMap;
@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.hoomanlogic.meals.OperatorResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,21 +17,18 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-public abstract class WitAiOperator extends BaseOperator {
-    final private String WIT_AI_KEY = "KLHUGVC6PAI45WRMIKP4HWK625GM322R"; //"6DQ2DC3A3DBNMM4AM4XPAKDBAUKA3TPU";
-    final private String WIT_AI_URL = "https://api.wit.ai/converse?q=";
-    final private Map<String, String> mHeaders = new ArrayMap<>();
+public abstract class LuisAiOperator extends BaseOperator {
+    final private String LUIS_AI_URL = "https://api.projectoxford.ai/luis/v1/application?id=49a25a7d-dc2a-444b-b791-309e19798088&subscription-key=4fa466a853cf4c6c8a25cb521b110d48&q=";
     private RequestQueue mRequestQueue = null;
 
-    public WitAiOperator(RequestQueue queue) {
+    public LuisAiOperator(RequestQueue queue) {
         mRequestQueue = queue;
-        mHeaders.put("Authorization", "Bearer " + WIT_AI_KEY);
     }
 
     @Override
     public void interpret(String request) {
         // Build api request url
-        String url = WIT_AI_URL + Uri.encode(request);
+        String url = LUIS_AI_URL + Uri.encode(request);
         // Create http request and add to request queue
         JsonObjectRequest httpRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -42,21 +40,17 @@ public abstract class WitAiOperator extends BaseOperator {
                         // FOO
                         OperatorResponse opResponse = new OperatorResponse();
                         try {
-                            String type = response.getString("type");
-                            if (type == "action") {
-                                opResponse.Action = response.getString("action");
-                            }
-                            else if (type == "")
+                            // First (highest-scoring) intent is our action
+                            JSONObject bestMatchingIntent = response.getJSONArray("intents").getJSONObject(0);
+                            opResponse.Intent = bestMatchingIntent.getString("intent");
 
-                            JSONObject entities = response.getJSONObject("entities");
-                            JSONArray parameterKeys = entities.names();
-                            int keyLen = parameterKeys.length();
-                            for (int i = 0; i < keyLen; i++) {
-                                String key = parameterKeys.getString(i);
-                                String value = entities.getJSONArray(parameterKeys.getString(i)).getJSONObject(0).getString("value");
+                            // Get parameters
+                            JSONArray entities = response.getJSONArray("entities");
+                            for (int i = 0; i < entities.length(); i++) {
+                                String key = entities.getJSONObject(i).getString("type");
+                                String value = entities.getJSONObject(i).getString("entity");
                                 opResponse.Parameters.put(key, value);
                             }
-
                             onOperatorResponse(opResponse);
                         }
                         catch (JSONException e) {
@@ -74,12 +68,7 @@ public abstract class WitAiOperator extends BaseOperator {
                         // BAR
                     }
                 }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return mHeaders;
-            }
-        };
+        );
         mRequestQueue.add(httpRequest);
     }
 }
