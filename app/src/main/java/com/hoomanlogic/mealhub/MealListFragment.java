@@ -1,20 +1,11 @@
-package com.hoomanlogic.meals;
+package com.hoomanlogic.mealhub;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MealListFragment extends Fragment {
     static MealListFragment newInstance() {
@@ -27,13 +18,9 @@ public class MealListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Build Meals List
-        ArrayList<MealModel> meals = new ArrayList<>();
-        meals.add(new MealModel("Smoothie", 7));
-        meals.add(new MealModel("Vegetable Noodle Soup", 15));
-        meals.add(new MealModel("PB&J Sammy", 5));
+
         // Setup adapter for list view
-        mAdapter = new MealsAdapter(getActivity(), R.layout.meal_row, (List)meals);
+        mAdapter = new MealsAdapter(getActivity(), R.layout.meal_row, DataAccess.getMeals());
     }
 
     @Override

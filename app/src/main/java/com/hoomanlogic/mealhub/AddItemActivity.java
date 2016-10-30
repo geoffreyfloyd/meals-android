@@ -1,5 +1,6 @@
-package com.hoomanlogic.meals;
+package com.hoomanlogic.mealhub;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import com.hoomanlogic.ai.LuisAiOperator;
 
 import java.util.Map;
 
-public class AddItemActivity extends AppCompatActivity {
+public class AddItemActivity extends FragmentActivity {
 
     private RequestQueue mRequestQueue = null;
     private BaseOperator mOperator = null;

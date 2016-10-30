@@ -1,4 +1,4 @@
-package com.hoomanlogic.meals;
+package com.hoomanlogic.mealhub;
 
 import android.support.v4.util.ArrayMap;
 

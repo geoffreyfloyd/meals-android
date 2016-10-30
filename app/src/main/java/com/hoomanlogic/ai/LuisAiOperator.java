@@ -1,21 +1,17 @@
 package com.hoomanlogic.ai;
 
 import android.net.Uri;
-import android.support.v4.util.ArrayMap;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.hoomanlogic.meals.OperatorResponse;
+import com.hoomanlogic.mealhub.OperatorResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Map;
 
 public abstract class LuisAiOperator extends BaseOperator {
     final private String LUIS_AI_URL = "https://api.projectoxford.ai/luis/v1/application?id=49a25a7d-dc2a-444b-b791-309e19798088&subscription-key=4fa466a853cf4c6c8a25cb521b110d48&q=";

@@ -1,4 +1,4 @@
-package com.hoomanlogic.meals;
+package com.hoomanlogic.mealhub;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

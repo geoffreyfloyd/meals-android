@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hoomanlogic.meals.AddItemActivity">
+    tools:context="com.hoomanlogic.mealhub.AddItemActivity">
 
     <TextView
         android:text="TextView"

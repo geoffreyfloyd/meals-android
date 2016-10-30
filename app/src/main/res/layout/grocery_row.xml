@@ -2,22 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:weightSum="10">
     <TextView
         android:id="@+id/name"
         android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="8"
+        android:layout_weight="5"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp" />
-    <com.hoomanlogic.mealhub.Pie
-        android:id="@+id/minutes"
-        android:layout_height="50dp"
+    <TextView
+        android:id="@+id/daysToPerish"
+        android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="2"
-        app:borderThickness="3dp" />
+        android:layout_weight="5"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp" />
 </LinearLayout>

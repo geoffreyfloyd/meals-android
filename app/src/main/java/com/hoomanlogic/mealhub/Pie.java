@@ -1,16 +1,13 @@
-package com.hoomanlogic.meals;
+package com.hoomanlogic.mealhub;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-
-import java.util.Random;
 
 /**
  * TODO: document your custom view class.
