@@ -3,6 +3,7 @@ package com.hoomanlogic.mealhub;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -57,11 +58,10 @@ public class GroceryGroupListFragment extends Fragment {
         });
 
         // Set up list item click
-        ExpandableListView listView = (ExpandableListView)_View.findViewById(R.id.listView);
+        final ExpandableListView listView = (ExpandableListView)_View.findViewById(R.id.listView);
         listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
                 GroceryModel model = (GroceryModel) _Adapter.getChild(groupPosition, childPosition);
                 Intent editGroceryIntent = new Intent(getActivity(), AddEditGrocery.class);
                 editGroceryIntent.putExtra("id", model.Id);
@@ -74,10 +74,18 @@ public class GroceryGroupListFragment extends Fragment {
         return _View;
     }
 
+
+    private Parcelable _ListState = null;
+    private int _ListPosition = 0;
+    private int _ItemPosition = 0;
+
     private void updateList () {
+
+        // final ExpandableListView listView = (ExpandableListView)_View.findViewById(R.id.listView);
+
         // Populate listview from firebase db
         DatabaseReference _Db = FirebaseDatabase.getInstance().getReference();
-        _Db.child("data").child("groceries").addListenerForSingleValueEvent(new ValueEventListener() {
+        _Db.child("data").child("groceries").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get list of groceries
@@ -91,12 +99,21 @@ public class GroceryGroupListFragment extends Fragment {
 
                 // Create adapter and assign to list view
                 _Adapter = new GroceryGroupListAdapter(getActivity(), R.layout.grocery_row, groceryList);
+
                 ExpandableListView listView = (ExpandableListView)_View.findViewById(R.id.listView);
+                _ListState = listView.onSaveInstanceState();
+                _ListPosition = listView.getFirstVisiblePosition();
+                View itemView = listView.getChildAt(0);
+                _ItemPosition = itemView == null ? 0 : itemView.getTop();
+
                 listView.setAdapter(_Adapter);
                 listView.expandGroup(0);
                 listView.expandGroup(1);
                 listView.expandGroup(2);
                 listView.expandGroup(3);
+
+                listView.onRestoreInstanceState(_ListState);
+                listView.setSelectionFromTop(_ListPosition, _ItemPosition);
             }
 
             @Override
@@ -105,6 +122,15 @@ public class GroceryGroupListFragment extends Fragment {
             }
         });
     }
+
+
+//    protected void onRestoreInstanceState(Bundle state) {
+//        super.onRestoreInstanceState(state);
+//    }
+//
+//    protected void onResume() {
+//
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

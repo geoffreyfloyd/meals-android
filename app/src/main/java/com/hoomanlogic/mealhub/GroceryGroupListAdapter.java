@@ -2,11 +2,14 @@ package com.hoomanlogic.mealhub;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -163,12 +166,45 @@ public class GroceryGroupListAdapter extends BaseExpandableListAdapter {
             view = vi.inflate(R.layout.grocery_row, null);
         }
         // Get item from list
-        GroceryModel item = (GroceryModel) this.getChild(groupPosition, childPosition);
+        final GroceryModel item = (GroceryModel) this.getChild(groupPosition, childPosition);
         if (item != null) {
             TextView nameText = (TextView)view.findViewById(R.id.name);
             nameText.setText(item.getName());
-            TextView daysToPerishText = (TextView)view.findViewById(R.id.daysToPerish);
-            daysToPerishText.setText(String.valueOf(item.DaysToPerish));
+            TextView needText = (TextView)view.findViewById(R.id.need);
+            if (item.Need > 0) {
+                // Highlight background color as selected
+                Resources res = _Context.getResources();
+                int bgColor = toCategoryColor(res, groupPosition);
+                view.setBackgroundColor(Color.argb(80, Color.red(bgColor), Color.green(bgColor), Color.blue(bgColor)));
+                // Add # when more than 1
+                if (item.Need > 1) {
+                    needText.setText(String.valueOf(item.Need));
+                }
+            }
+            else {
+                needText.setText("");
+
+                view.setBackgroundColor(Color.TRANSPARENT);
+            }
+            Button decrementButton = (Button) view.findViewById(R.id.decrement);
+            decrementButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (item.Need > 0) {
+                        item.Need -= 1;
+                        DataAccess.saveGrocery(item);
+
+                    }
+                }
+            });
+            Button incrementButton = (Button) view.findViewById(R.id.increment);
+            incrementButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    item.Need += 1;
+                    DataAccess.saveGrocery(item);
+                }
+            });
         }
         return view;
     }

@@ -72,8 +72,13 @@ public class GroceriesAdapter extends ArrayAdapter<GroceryModel> {
         if (item != null) {
             TextView nameText = (TextView)view.findViewById(R.id.name);
             nameText.setText(item.getName());
-            TextView daysToPerishText = (TextView)view.findViewById(R.id.daysToPerish);
-            daysToPerishText.setText(String.valueOf(item.DaysToPerish));
+            TextView needText = (TextView)view.findViewById(R.id.need);
+            if (item.Need > 0) {
+                needText.setText(String.valueOf(item.Need));
+            }
+            else {
+                needText.setText("");
+            }
         }
         return view;
     }

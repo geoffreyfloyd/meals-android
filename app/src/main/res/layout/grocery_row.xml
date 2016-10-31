@@ -3,23 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:weightSum="10">
+    android:weightSum="12">
     <TextView
         android:id="@+id/name"
         android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="5"
+        android:layout_weight="7"
+        android:textSize="16sp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginRight="16dp" />
     <TextView
-        android:id="@+id/daysToPerish"
+        android:id="@+id/need"
         android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="5"
+        android:layout_weight="1"
+        android:textSize="16sp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginRight="16dp" />
+    <Button
+        android:id="@+id/decrement"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:layout_weight="2"
+        android:text="-" />
+    <Button
+        android:id="@+id/increment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:layout_weight="2"
+        android:text="+"/>
 </LinearLayout>
