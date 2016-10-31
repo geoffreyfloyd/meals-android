@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "694975571209",
+    "firebase_url": "https://doozy-31df5.firebaseio.com",
+    "project_id": "doozy-31df5",
+    "storage_bucket": "doozy-31df5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694975571209:android:2a60c05a2a3de6b9",
+        "android_client_info": {
+          "package_name": "com.hoomanlogic.mealhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694975571209-i5h8p2o0r2rujaokt3a42kgfaam25a42.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxsV3xD6wF_wo4rz0f4SopEKZuSzO7e4c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

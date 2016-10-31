@@ -2,9 +2,10 @@ package com.hoomanlogic.mealhub;
 
 import com.hoomanlogic.util.Format;
 
-public class GroceryModel {
+public class GroceryModel  {
     public String Id;
-    public String Name;
+    private String Name;
+    public String Category;
     public int DaysToPerish;
     public int Need;
     public String NeedUnit;
@@ -26,5 +27,9 @@ public class GroceryModel {
     public void setName(String name) {
         this.Id = Format.toSlug(name);
         this.Name = name;
+    }
+
+    public String getName() {
+        return this.Name;
     }
 }

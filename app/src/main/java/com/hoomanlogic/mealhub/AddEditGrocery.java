@@ -1,11 +1,19 @@
 package com.hoomanlogic.mealhub;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class AddEditGrocery extends AppCompatActivity {
+    // CONSTANTS
+    final int ADD_GROCERY_REQUEST = 1;
+    // PRIVATE
     GroceryModel _Model;
 
     @Override
@@ -46,18 +54,48 @@ public class AddEditGrocery extends AppCompatActivity {
 
         // Load form from model
         Load();
+
+        Button buttonSave = (Button)findViewById(R.id.buttonSave);
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Save();
+            }
+        });
     }
 
     private void Load() {
+        // Get refs to edit fields
         EditText editName = (EditText)findViewById(R.id.editName);
+        EditText editCategory = (EditText)findViewById(R.id.editCategory);
         EditText editPerishes = (EditText)findViewById(R.id.editPerishes);
-        editName.setText(_Model.Name);
-        editPerishes.setText(String.valueOf(_Model.DaysToPerish));
+        // Set edit fields with values from model
+        editName.setText(_Model.getName());
+        editCategory.setText(_Model.Category);
+        if (_Model.DaysToPerish > 0) {
+            editPerishes.setText(String.valueOf(_Model.DaysToPerish));
+        }
     }
 
     private void Save() {
-        // Persist to internal database
-
+        // Get refs to edit fields
+        EditText editName = (EditText)findViewById(R.id.editName);
+        EditText editCategory = (EditText)findViewById(R.id.editCategory);
+        EditText editPerishes = (EditText)findViewById(R.id.editPerishes);
+        // Set model with values from edit fields
+        _Model.setName(editName.getText().toString());
+        _Model.Category = editCategory.getText().toString();
+        String daysToPerish = editPerishes.getText().toString();
+        if (daysToPerish.isEmpty()) {
+            daysToPerish = "0";
+        }
+        _Model.DaysToPerish = Integer.parseInt(daysToPerish);
+        // Persist model to db
+        DataAccess.saveGrocery(_Model);
+        // Update Activity Result and Finish
+        setResult(RESULT_OK);
+        finishActivity(ADD_GROCERY_REQUEST);
+        finish();
     }
 
 }
