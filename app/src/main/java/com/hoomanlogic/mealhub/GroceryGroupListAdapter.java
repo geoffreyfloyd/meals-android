@@ -18,10 +18,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by owner on 10/30/16.
- */
-
 public class GroceryGroupListAdapter extends BaseExpandableListAdapter {
     public static final int CATEGORY_PRODUCE_BAKERY = 0;
     public static final int CATEGORY_FROZEN = 1;
@@ -187,16 +183,22 @@ public class GroceryGroupListAdapter extends BaseExpandableListAdapter {
                 view.setBackgroundColor(Color.TRANSPARENT);
             }
             Button decrementButton = (Button) view.findViewById(R.id.decrement);
-            decrementButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (item.Need > 0) {
-                        item.Need -= 1;
-                        DataAccess.saveGrocery(item);
+            if (item.Need > 0) {
+                decrementButton.setVisibility(View.VISIBLE);
+                decrementButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (item.Need > 0) {
+                            item.Need -= 1;
+                            DataAccess.saveGrocery(item);
 
+                        }
                     }
-                }
-            });
+                });
+            }
+            else {
+                decrementButton.setVisibility(View.INVISIBLE);
+            }
             Button incrementButton = (Button) view.findViewById(R.id.increment);
             incrementButton.setOnClickListener(new View.OnClickListener() {
                 @Override
