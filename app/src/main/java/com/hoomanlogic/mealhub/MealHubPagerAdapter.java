@@ -20,7 +20,7 @@ public class MealHubPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return GroceryListFragment.newInstance();
+                return GroceryGroupListFragment.newInstance();
             case 1:
                 return MealListFragment.newInstance();
             default:

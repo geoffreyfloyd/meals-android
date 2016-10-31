@@ -12,10 +12,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class GroceriesAdapter extends ArrayAdapter<GroceryModel> {
-//    public static final int CATEGORY_PRODUCE_BAKERY = 0;
-//    public static final int CATEGORY_FROZEN = 1;
-//    public static final int CATEGORY_MEAT_DAIRY = 2;
-//    public static final int CATEGORY_SHELF_MISC = 3;
 
     public static final Comparator<GroceryModel> CATEGORY_ORDER = new Comparator<GroceryModel>() {
         @Override
