@@ -68,28 +68,18 @@ public class AddEditGrocery extends AppCompatActivity {
         // Get refs to edit fields
         EditText editName = (EditText)findViewById(R.id.editName);
         EditText editCategory = (EditText)findViewById(R.id.editCategory);
-        EditText editPerishes = (EditText)findViewById(R.id.editPerishes);
         // Set edit fields with values from model
         editName.setText(_Model.getName());
         editCategory.setText(_Model.Category);
-        if (_Model.DaysToPerish > 0) {
-            editPerishes.setText(String.valueOf(_Model.DaysToPerish));
-        }
     }
 
     private void Save() {
         // Get refs to edit fields
         EditText editName = (EditText)findViewById(R.id.editName);
         EditText editCategory = (EditText)findViewById(R.id.editCategory);
-        EditText editPerishes = (EditText)findViewById(R.id.editPerishes);
         // Set model with values from edit fields
         _Model.setName(editName.getText().toString());
         _Model.Category = editCategory.getText().toString();
-        String daysToPerish = editPerishes.getText().toString();
-        if (daysToPerish.isEmpty()) {
-            daysToPerish = "0";
-        }
-        _Model.DaysToPerish = Integer.parseInt(daysToPerish);
         // Persist model to db
         DataAccess.saveGrocery(_Model);
         // Update Activity Result and Finish
