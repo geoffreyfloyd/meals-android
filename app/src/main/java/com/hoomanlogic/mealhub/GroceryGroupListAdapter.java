@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -164,46 +166,29 @@ public class GroceryGroupListAdapter extends BaseExpandableListAdapter {
         // Get item from list
         final GroceryModel item = (GroceryModel) this.getChild(groupPosition, childPosition);
         if (item != null) {
-            TextView nameText = (TextView)view.findViewById(R.id.name);
-            nameText.setText(item.getName());
-            TextView needText = (TextView)view.findViewById(R.id.need);
+            CheckBox groceryItem = (CheckBox)view.findViewById(R.id.name);
+            groceryItem.setText(item.getName());
+            groceryItem.setChecked(item.Need > 0);
+            // Stand out with background
             if (item.Need > 0) {
                 // Highlight background color as selected
                 Resources res = _Context.getResources();
                 int bgColor = toCategoryColor(res, groupPosition);
                 view.setBackgroundColor(Color.argb(80, Color.red(bgColor), Color.green(bgColor), Color.blue(bgColor)));
-                // Add # when more than 1
-                if (item.Need > 1) {
-                    needText.setText(String.valueOf(item.Need));
-                }
             }
             else {
-                needText.setText("");
-
                 view.setBackgroundColor(Color.TRANSPARENT);
             }
-            Button decrementButton = (Button) view.findViewById(R.id.decrement);
-            if (item.Need > 0) {
-                decrementButton.setVisibility(View.VISIBLE);
-                decrementButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (item.Need > 0) {
-                            item.Need -= 1;
-                            DataAccess.saveGrocery(item);
 
-                        }
-                    }
-                });
-            }
-            else {
-                decrementButton.setVisibility(View.INVISIBLE);
-            }
-            Button incrementButton = (Button) view.findViewById(R.id.increment);
-            incrementButton.setOnClickListener(new View.OnClickListener() {
+            groceryItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onClick(View v) {
-                    item.Need += 1;
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        item.Need = 1;
+                    }
+                    else {
+                        item.Need = 0;
+                    }
                     DataAccess.saveGrocery(item);
                 }
             });

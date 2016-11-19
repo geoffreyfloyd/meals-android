@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -70,15 +71,8 @@ public class GroceriesAdapter extends ArrayAdapter<GroceryModel> {
         // Get item from list
         GroceryModel item = this.getItem(position);
         if (item != null) {
-            TextView nameText = (TextView)view.findViewById(R.id.name);
+            CheckBox nameText = (CheckBox)view.findViewById(R.id.name);
             nameText.setText(item.getName());
-            TextView needText = (TextView)view.findViewById(R.id.need);
-            if (item.Need > 0) {
-                needText.setText(String.valueOf(item.Need));
-            }
-            else {
-                needText.setText("");
-            }
         }
         return view;
     }
