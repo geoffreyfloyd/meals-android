@@ -180,10 +180,10 @@ public class GroceryGroupListAdapter extends BaseExpandableListAdapter {
                 view.setBackgroundColor(Color.TRANSPARENT);
             }
 
-            groceryItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            groceryItem.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
+                public void onClick(View v) {
+                    if (item.Need == 0) {
                         item.Need = 1;
                     }
                     else {
